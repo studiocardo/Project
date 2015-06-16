@@ -7,20 +7,13 @@ In RStudio
 
 You should have the following files to run the R program:
 
-1. run_analysis.R
-2. feature.txt
-3. CodeBook.md
-
-May  3 14:13 CodeBook.md
-Jun 16 15:53 Getting-Cleaning-Data-Project/
-May  3 14:14 README.txt*
-Jun 16 14:33 UCI HAR Dataset/
-Oct 10  2012 activity_labels.txt*
-Oct 11  2012 features.txt*
-Oct 15  2012 features_info.txt*
-Jun 16 14:56 run_analysis.R
-May  3 14:11 tidy_averages.txt
-Jun 16 14:56 tidydata.csv
+CodeBook.md
+README.txt*
+activity_labels.txt*
+features.txt*
+features_info.txt*
+run_analysis.R
+tidy_averages.txt
 
 Original README......
 ==================================================================
