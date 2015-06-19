@@ -1,14 +1,16 @@
 Instruction:
 
 In RStudio
-1. setwd() to the directory containing all the data files and the R script
-1. source(run_analysis.R)
-2. look for the output file tidydata.csv in the working diretory 
+1. setwd() to the directory containing all the data files and the R script as shown in the directory listing above
+2. everything should be self-contained as we speak.  If that's not the case, the program will try to download it from the URL
+3. after set the correct working directory, issue "source("run_analysis.R")" in RStudio
+3a. this program uses dplyr, so you need to have it in your local installation if you haven't done so already
+4. look for the output file tidydata.txt in the working directory 
 
 You should have the following files to run the R program:
 
 CodeBook.md
-README.txt*
+README.md*
 activity_labels.txt*
 features.txt*
 features_info.txt*
