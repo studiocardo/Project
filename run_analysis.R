@@ -6,16 +6,14 @@ library(dplyr)
 orgwd<-getwd()
 
 #
-#
+# Check to ensure the necessary data source files are present
 #
 url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 
-dataname <- "UCI HAR Dataset"
-isdatapres <- file.exists(dataname)
-if (!isdatapres) {
-    download.file(url,
-                  destfile = "dataset.zip",
-                  method = "curl")
+dataset <- "UCI HAR Dataset"
+gotdata <- file.exists(dataset)
+if (!gotdata) {
+    download.file(url, destfile = "dataset.zip", method = "curl")
     unzip("dataset.zip")
     file.remove("dataset.zip")
 }
@@ -33,17 +31,17 @@ activity_labels <- read.table("activity_labels.txt", colClasses=classes, strings
 #
 # Change wd to train so simplifies reading the files
 #
-setwd(file.path(orgwd, dataname, "train", sep="/"))
+setwd(file.path(orgwd, dataset, "train", sep="/"))
 
-x_train_df <- read.table("X_train.txt", colClasses="numeric", col.names=features[,2], check.names = TRUE)
+x_train_df <- read.table("X_train.txt", colClasses="numeric", check.names = TRUE)
 y_train_df <- read.table("y_train.txt", colClasses="integer", col.names="Activity", check.names = TRUE)
 subject_train_df <- read.table("subject_train.txt", colClasses="integer", col.names="Subject", check.names = TRUE)
 
 # Change wd to test so simplifies reading the files
 #
-setwd(file.path(orgwd, dataname, "test", sep="/"))
+setwd(file.path(orgwd, dataset, "test", sep="/"))
 
-x_test_df <- read.table("X_test.txt", colClasses="numeric", col.names=features[,2], check.names = TRUE)
+x_test_df <- read.table("X_test.txt", colClasses="numeric", check.names = TRUE)
 y_test_df  <- read.table("y_test.txt",  colClasses="integer", col.names="Activity", check.names = TRUE)
 subject_test_df  <- read.table("subject_test.txt",  colClasses="integer", col.names="Subject", check.names = TRUE)
 
@@ -83,6 +81,17 @@ y <- bind_rows (y_test, y_train)
 subject <- bind_rows (subject_test, subject_train)
 
 #
+# Now we are going to add the column names to x and y
+# I chose not to use option col.names=feature[,2] because R fucks w/ column names when doing read.
+# It replaces '-', ' ', '()' to .
+#
+# http://stackoverflow.com/questions/17152483/how-to-replace-the-in-column-names-generated-by-read-csv-with-a-single-spa
+#
+
+measurement <- features[,2]
+names(x) <- measurement
+
+#
 # Freaky what you can do w/ mutate...  A little testing is required to gain confidence on how dplyr does things...
 # Take whatever observation value is in the column Activity and use that as an index for the activity_labels to retrieve
 # the string value of that activity_labels observation and apply that back into the observation of Activity in y
@@ -100,13 +109,16 @@ y <- mutate(y, Activity = activity_labels[Activity, 2])
 
 cran <- bind_cols(subject, y, x)
 
-# get only columns with mean() or std() in their names
+#
+# get only mean() or std() of each measurement
+# and that is presented in the format of xxxx-mean() or xxx-std()
+#
+# Need to include Subject and Activity, or they get left out of the grep
 #
 
-query = "mean|std"
-# candy <- cran[,grepl(query, colnames(cran))] is simpler, but I want to try to use dplyr, 
+query = "Subject|Activity|-(mean|std)\\(\\)"
 
-candy <- cran %>% select (Subject, Activity, grep(query, names(cran)))
+candy <- cran[, grepl(query, names(cran))]
 
 #
 # From the data set in step 4, creates a second, 
@@ -124,3 +136,4 @@ meancandy <- candy %>%
 # Write the output to the files tidydata.csv in the working directory 
 #
 write.csv(meancandy, "tidydata.csv")
+
