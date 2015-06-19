@@ -1,23 +1,32 @@
-Instruction:
+#Instruction:
 
 In RStudio
 1. setwd() to the directory containing all the data files and the R script as shown in the directory listing above
-2. everything should be self-contained as we speak.  If that's not the case, the program will try to download it from the URL
-3. after set the correct working directory, issue "source("run_analysis.R")" in RStudio
+2. everything should be self-contained as we speak.  If that's not the case, the program will try to download the "UCI HAR Dataset" from the URL
+3. after set the correct working directory in RStudio, issue "source("run_analysis.R")"
 3a. this program uses dplyr, so you need to have it in your local installation if you haven't done so already
+3b. the program will read and merge the training and testing dataset 
+3c. out of the dataset from 3b, it then extract only the subset of data that only contain variables pertaining to "mean" or "standard deviation" of the measured values, so specific attention needs to be paid to the regex
 4. look for the output file tidydata.txt in the working directory 
 
 You should have the following files to run the R program:
 
+## Input and Source Files
+
 CodeBook.md
 README.md*
-activity_labels.txt*
-features.txt*
-features_info.txt*
 run_analysis.R
-tidy_averages.txt
+./UCI HAR Dataset/test
+./UCI HAR Dataset/train
+./UCI HAR Dataset/features.txt
+./UCI HAR Dataset/activity_labels.txt
+./UCI HAR Dataset/feature_info.txt
 
-Original README......
+## Output File(s)
+
+tidydata.txt
+
+## Original README......
 ==================================================================
 Human Activity Recognition Using Smartphones Dataset
 Version 1.0

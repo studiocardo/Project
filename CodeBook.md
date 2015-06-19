@@ -1,87 +1,86 @@
-This assignments rquires creation of a R script called run_analysis.R that does the following. 
-Merges the training and the test sets to create one data set.
-Extracts only the measurements on the mean and standard deviation for each measurement. 
-Uses descriptive activity names to name the activities in the data set
-Appropriately labels the data set with descriptive variable names. 
-From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+# What the heck this exercise does
 
-STEPS:
+The original data for this project are scattered across multiple files.  The purpose of this exercise is to consolidate them and make them more user-friendly.  No analysis is to be performed so to speak.
 
-1. Download and extract the original dataset from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+## The background
 
-2. Run run_analysis.R script in RStudio
+This data consist of data of 561 different measurements obtained from a smartphone.  Each observation contains the 561 measurements pertaining via a smartphone when a test subject was doing a particular exercise.
 
-3. run_analysis.R will:
+Each subject was made to perform 6 different exercise () and there are 30 subjects participating in this research, so there are a total of 180 observations. The master data set contains a total of 563 columns, consisting of the 561 measurements, plus the column for subject and activity.
 
-3.a merged the training and testing dataset 
-3.b out of the dataset from 3a, it then produces a subset of data that only contain variables pertaining to "mean" or "standard deviation"
+## Output file
+The output of this exercise is tidydata.txt with the following format:
 
-For the record, these are the variables: 
-"tBodyAcc-mean()-X"
-"tBodyAcc-mean()-Y"
-"tBodyAcc-mean()-Z"
-"tBodyAcc-std()-X"
-"tBodyAcc-std()-Y"
-"tBodyAcc-std()-Z"
-"tGravityAcc-mean()-X"
-"tGravityAcc-mean()-Y"
-"tGravityAcc-mean()-Z"
-"tGravityAcc-std()-X"
-"tGravityAcc-std()-Y"
-"tGravityAcc-std()-Z"
-"tBodyAccJerk-mean()-X"
-"tBodyAccJerk-mean()-Y"
-"tBodyAccJerk-mean()-Z"
-"tBodyAccJerk-std()-X"
-"tBodyAccJerk-std()-Y"
-"tBodyAccJerk-std()-Z"
-"tBodyGyro-mean()-X"
-"tBodyGyro-mean()-Y"
-"tBodyGyro-mean()-Z"
-"tBodyGyro-std()-X"
-"tBodyGyro-std()-Y"
-"tBodyGyro-std()-Z"
-"tBodyGyroJerk-mean()-X"
-"tBodyGyroJerk-mean()-Y"
-"tBodyGyroJerk-mean()-Z"
-"tBodyGyroJerk-std()-X"
-"tBodyGyroJerk-std()-Y"
-"tBodyGyroJerk-std()-Z"
-"tBodyAccMag-mean()"
-"tBodyAccMag-std()"
-"tGravityAccMag-mean()"
-"tGravityAccMag-std()"
-"tBodyAccJerkMag-mean()"
-"tBodyAccJerkMag-std()"
-"tBodyGyroMag-mean()"
-"tBodyGyroMag-std()"
-"tBodyGyroJerkMag-mean()"
-"tBodyGyroJerkMag-std()"
-"fBodyAcc-mean()-X"
-"fBodyAcc-mean()-Y"
-"fBodyAcc-mean()-Z"
-"fBodyAcc-std()-X"
-"fBodyAcc-std()-Y"
-"fBodyAcc-std()-Z"
-"fBodyAccJerk-mean()-X"
-"fBodyAccJerk-mean()-Y"
-"fBodyAccJerk-mean()-Z"
-"fBodyAccJerk-std()-X"
-"fBodyAccJerk-std()-Y"
-"fBodyAccJerk-std()-Z"
-"fBodyGyro-mean()-X"
-"fBodyGyro-mean()-Y"
-"fBodyGyro-mean()-Z"
-"fBodyGyro-std()-X"
-"fBodyGyro-std()-Y"
-"fBodyGyro-std()-Z"
-"fBodyAccMag-mean()"
-"fBodyAccMag-std()"
-"fBodyBodyAccJerkMag-mean()"
-"fBodyBodyAccJerkMag-std()"
-"fBodyBodyGyroMag-mean()"
-"fBodyBodyGyroMag-std()"
-"fBodyBodyGyroJerkMag-mean()"
-"fBodyBodyGyroJerkMag-std()"
+180 observations: 30 subjects performing 6 exercises -> 180.
+68 columns: subject, activity, and 66 measurements that are either mean or std deviation values of the measurements.
 
-2.c For each subject and each activity, calculates the mean of each subsetting measure
+## Details of each measurements found in tidaydata.txt
+
+columns 3 - 68:
+
+3. tBodyAcc-mean-X
+4. tBodyAcc-mean-Y
+5. tBodyAcc-mean-Z
+6. tBodyAcc-std-X
+7. tBodyAcc-std-Y
+8. tBodyAcc-std-Z
+9. tGravityAcc-mean-X
+10. tGravityAcc-mean-Y
+11. tGravityAcc-mean-Z
+12. tGravityAcc-std-X
+13. tGravityAcc-std-Y
+14. tGravityAcc-std-Z
+15. tBodyAccJerk-mean-X
+16. tBodyAccJerk-mean-Y
+17. tBodyAccJerk-mean-Z
+18. tBodyAccJerk-std-X
+19. tBodyAccJerk-std-Y
+20. tBodyAccJerk-std-Z
+21. tBodyGyro-mean-X
+22. tBodyGyro-mean-Y
+23. tBodyGyro-mean-Z
+24. tBodyGyro-std-X
+25. tBodyGyro-std-Y
+26. tBodyGyro-std-Z
+27. tBodyGyroJerk-mean-X
+28. tBodyGyroJerk-mean-Y
+29. tBodyGyroJerk-mean-Z
+30. tBodyGyroJerk-std-X
+31. tBodyGyroJerk-std-Y
+32. tBodyGyroJerk-std-Z
+33. tBodyAccMag-mean
+34. tBodyAccMag-std
+35. tGravityAccMag-mean
+36. tGravityAccMag-std
+37. tBodyAccJerkMag-mean
+38. tBodyAccJerkMag-std
+39. tBodyGyroMag-mean
+40. tBodyGyroMag-std
+41. tBodyGyroJerkMag-mean
+42. tBodyGyroJerkMag-std
+43. fBodyAcc-mean-X
+44. fBodyAcc-mean-Y
+45. fBodyAcc-mean-Z
+46. fBodyAcc-std-X
+47. fBodyAcc-std-Y
+48. fBodyAcc-std-Z
+49. fBodyAccJerk-mean-X
+50. fBodyAccJerk-mean-Y
+51. fBodyAccJerk-mean-Z
+52. fBodyAccJerk-std-X
+53. fBodyAccJerk-std-Y
+54. fBodyAccJerk-std-Z
+55. fBodyGyro-mean-X
+56. fBodyGyro-mean-Y
+57. fBodyGyro-mean-Z
+58. fBodyGyro-std-X
+59. fBodyGyro-std-Y
+60. fBodyGyro-std-Z
+61. fBodyAccMag-mean
+62. fBodyAccMag-std
+63. fBodyBodyAccJerkMag-mean
+64. fBodyBodyAccJerkMag-std
+65. fBodyBodyGyroMag-mean
+66. fBodyBodyGyroMag-std
+67. fBodyBodyGyroJerkMag-mean
+68. fBodyBodyGyroJerkMag-std

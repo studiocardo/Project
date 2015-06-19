@@ -21,6 +21,7 @@ if (!gotdata) {
 #
 # Read in the data from various source files
 #
+setwd(file.path(orgwd, dataset, sep="/"))
 
 classes <- c("integer", "character")
 features <- read.table("features.txt", colClasses=classes, stringsAsFactors = FALSE)
