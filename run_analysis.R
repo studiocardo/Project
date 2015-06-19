@@ -133,7 +133,7 @@ meancandy <- candy %>%
 	summarise_each(funs(mean))
 
 #
-# Write the output to the files tidydata.csv in the working directory 
+# Write the output to the files tidydata.txt in the working directory 
 #
-write.csv(meancandy, "tidydata.csv")
+write.table(meancandy, "tidydata.txt", row.name=FALSE)
 
